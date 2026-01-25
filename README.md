@@ -24,11 +24,11 @@ Traditional aerodynamic shape optimization methods suffer from poor robustness a
 
 **Objective**
 
-Reduce aerodynamic drag using adjoint-based optimization
+ - Reduce aerodynamic drag using adjoint-based optimization
 
-Ensure accurate sensitivity computation
+ - Ensure accurate sensitivity computation
 
-Maintain mesh quality during shape deformation
+ - Maintain mesh quality during shape deformation
 
 **Methodology**
 
