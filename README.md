@@ -11,7 +11,7 @@ ___
 | Name                          | Roll Number |
 | ----------------------------- | ----------- |
 | Amrutha Tammurothu            | CB.SC.U4AIE24255       |
-| Bala Prasanna Kumar Thelapolu | CB.SC.U4AIE24256       |
+| Bala Prasanna Kumar Telapolu | CB.SC.U4AIE24256       |
 | Charan Tej Reddy Yammunuru    | CB.SC.U4AIE24259       |
 | Poojitha Devineni             |CB.SC.U4AIE 24263       |
 ___
