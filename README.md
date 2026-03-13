@@ -1,92 +1,210 @@
-**Aerodynamic shape optimization based on discrete adjoint and RBF**
-___
 
-**Overview**
----
-This project develops a robust aerodynamic shape optimization framework by combining Discrete Adjoint methods with RBF-based mesh deformation to reduce drag while preserving mesh quality and using SU2 Software
-___
-**Team Members**
----
+# Aerodynamic Optimization Project using SU2
 
-| Name                          | Roll Number |
-| ----------------------------- | ----------- |
-| Amrutha Tammurothu            | CB.SC.U4AIE24255       |
-| Bala Prasanna Kumar Telapolu | CB.SC.U4AIE24256       |
-| Charan Tej Reddy Yammunuru    | CB.SC.U4AIE24259       |
-| Poojitha Devineni             |CB.SC.U4AIE 24263       |
-___
+## Overview
+This project performs aerodynamic simulations and shape optimization using the **SU2 Computational Fluid Dynamics (CFD) solver**.
 
-**Project Outline**
----
-**Problem**
+The goal of this project is to analyze and optimize aerodynamic performance for:
 
-Traditional aerodynamic shape optimization methods suffer from poor robustness and high computational cost due to inefficient mesh deformation techniques such as Linear Elasticity Analogy (ELA).
+- NACA0012 airfoil
+- ONERA M6 wing
+- NREL wind turbine blade
+- Winglet configuration
 
-**Objective**
+The project includes CFD simulations, mesh deformation, adjoint sensitivity analysis, and optimization.
 
- - Reduce aerodynamic drag using adjoint-based optimization
-
- - Ensure accurate sensitivity computation
-
- - Maintain mesh quality during shape deformation
-
-**Methodology**
-
-Geometry parameterization using Free-Form Deformation (FFD)
-
-Baseline CFD simulation using SU2
-
-Sensitivity computation using Discrete Adjoint method
-
-Mesh deformation using RBF interpolation
-
-Elimination of volume mesh sensitivity using double adjoint approach
-
-Performance evaluation using aerodynamic coefficients
-
-**Tools & Technologies**
-
-- SU2 (CFD & Adjoint Solver)
-
-- FFD (Geometry Parameterization)
-
-- RBF (Mesh Deformation)
-
-- Euler / Navier–Stokes Solver
-
-Gradient-based Optimization
-___
-**Current Updates**
 ---
 
- - Literature review completed
+## Software Requirements
 
- - NACA0012 airfoil geometry validated
+To run this project you need:
 
- - Baseline CFD simulations completed
+- SU2 CFD Solver
+- Python 3
+- Python libraries:
+  - numpy
+  - pandas
+  - matplotlib
 
- - Residual and force convergence verified
+Optional:
+- ParaView (for viewing CFD results)
 
- - Sensitivity formulation studied
-___
-**Challenges**
 ---
- - Maintaining mesh quality for large deformations
 
- - Efficient adjoint sensitivity computation
+## Project Folder Structure
 
- - Balancing accuracy and computational cost
-___
-**Future Plans**
+### Root Directory
+Contains scripts used to run simulations and optimizations.
+
+Important files:
+
+- run_su2_simulations.bat – runs SU2 simulations
+- run_all_optimizations.bat – runs all optimization cases
+- run_su2_simple.bat – runs a simple test case
+- test.cfg – example SU2 configuration
+
 ---
- - Apply optimization to 3D wings and winglets
 
- - Extend to turbulent flow simulations
+## configs/
+Contains SU2 configuration files used for CFD simulations.
 
- - Multi-objective optimization (drag, lift, moment)
+Each `.cfg` file defines:
+- Flow conditions
+- Solver settings
+- Mesh input
+- Optimization parameters
 
- - Real-world aerospace and wind energy applications
-___
-**Conclusion**
+Examples:
+- naca0012.cfg → NACA airfoil simulation
+- onera_m6.cfg → ONERA wing simulation
+- nrel.cfg → NREL turbine simulation
+- winglet.cfg → winglet simulation
 
-A stable and converged CFD solution using SU2 has been obtained, validating the solver and mesh setup. This forms a strong baseline for implementing adjoint-based aerodynamic shape optimization using RBF mesh deformation.
+---
+
+## meshes/
+Contains mesh files used by the CFD solver.
+
+Mesh format: `.su2`
+
+Subfolders include:
+- naca0012 – mesh for NACA airfoil simulations
+- onera_m6 – mesh for ONERA M6 wing simulations
+- nrel – mesh for NREL wind turbine simulations
+- winglet – mesh for winglet simulations
+
+---
+
+## optimization/
+Contains scripts used for aerodynamic shape optimization.
+
+Optimization algorithm used:
+**SLSQP (Sequential Least Squares Programming)**
+
+Main scripts:
+- run_slsqp_optimization.py
+- run_slsqp_clean.py
+
+These scripts perform:
+1. CFD simulation
+2. Sensitivity calculation
+3. Geometry deformation
+4. Optimization iteration
+
+---
+
+## optimization/ffd_boxes/
+Contains Free Form Deformation (FFD) box definitions.
+
+Examples:
+- naca0012_ffd.txt
+- onera_m6_ffd.txt
+
+FFD boxes define the control points used to deform the geometry.
+
+---
+
+## results/
+Stores simulation and optimization results.
+
+### figures
+Contains generated plots such as:
+- drag convergence plots
+- pressure coefficient plots
+- Mach contour plots
+
+### data
+Contains CSV files storing optimization history.
+
+Example:
+`optimization_history.csv`
+
+---
+
+## results/vtu_files/
+Contains CFD result files in `.vtu` format.
+
+These files can be opened using ParaView.
+
+They contain:
+- pressure fields
+- velocity fields
+- Mach contours
+
+---
+
+## scripts/
+Contains helper scripts for:
+- checking results
+- visualizing simulation outputs
+- plotting aerodynamic data
+
+---
+
+## Running Simulations
+
+1. Open the project folder.
+2. Run the following file:
+
+run_su2_simulations.bat
+
+This runs the SU2 solver for all test cases.
+
+---
+
+## Running Optimization
+
+To run optimization manually:
+
+python optimization/run_slsqp_optimization.py
+
+This script will:
+1. Run CFD simulation
+2. compute sensitivities
+3. deform the geometry
+4. update design variables
+5. repeat until convergence
+
+---
+
+## Generating Results
+
+To generate plots and figures:
+
+python results/generate_all_figures.py
+
+This creates:
+- drag convergence plots
+- pressure distribution plots
+- optimization history graphs
+
+---
+
+## Visualization
+
+Open `.vtu` files in ParaView from:
+
+results/vtu_files/
+
+These files allow visualization of:
+- pressure distribution
+- velocity fields
+- Mach contours
+
+---
+
+## Summary
+
+This project demonstrates a complete aerodynamic optimization workflow:
+
+1. Geometry generation
+2. Mesh creation
+3. CFD simulation using SU2
+4. Shape optimization
+5. Result visualization
+
+Test cases included:
+- NACA0012 airfoil
+- ONERA M6 wing
+- NREL wind turbine
+- Winglet configuration
