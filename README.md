@@ -192,7 +192,9 @@ These files allow visualization of:
 - Mach contours
 
 ---
-
+#Computational Time Analysis
+All the models were executed in MATLAB, taking approximately 50–60 seconds, whereas the simulations in SU2 and the visualization in ParaView required about 20–25 minutes.
+---
 ## Summary
 
 This project demonstrates a complete aerodynamic optimization workflow:
