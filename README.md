@@ -211,3 +211,8 @@ Test cases included:
 - ONERA M6 wing
 - NREL wind turbine
 - Winglet configuration
+
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
